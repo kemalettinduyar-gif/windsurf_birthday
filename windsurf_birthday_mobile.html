@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doğum Günün Kutlu Olsun Mustafa 💙</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to top, #003366, #ff9966);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      position: relative;
+    }
+    h1 {
+      font-size: 2.2em;
+      text-shadow: 2px 2px 6px #000;
+      animation: fadeIn 3s ease-in-out;
+      z-index: 2;
+    }
+    #mesaj {
+      font-size: 1.4em;
+      opacity: 0;
+      margin-top: 15px;
+      animation: mesajFade 5s ease-in-out 3s forwards;
+      z-index: 2;
+      text-shadow: 1px 1px 4px #000;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);} 
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes mesajFade {
+      from {opacity: 0; transform: translateY(10px);} 
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .wave {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 200px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 100%;
+      animation: wave 8s infinite linear;
+      z-index: 1;
+    }
+    @keyframes wave {
+      0% {transform: translateX(0);}
+      100% {transform: translateX(-50%);}
+    }
+    .sun {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      background: radial-gradient(circle, #ffcc33, #ff6600);
+      border-radius: 50%;
+      animation: sunset 20s ease-in-out forwards;
+      z-index: 0;
+    }
+    @keyframes sunset {
+      0% { bottom: 120px; background: radial-gradient(circle, #ffcc33, #ff6600);} 
+      50% { bottom: 60px; background: radial-gradient(circle, #ff9966, #cc3300);} 
+      100% { bottom: -60px; background: radial-gradient(circle, #663300, #330000);} 
+    }
+    button {
+      background: rgba(255,255,255,0.2);
+      border: 1px solid #fff;
+      color: white;
+      padding: 10px 20px;
+      font-size: 1em;
+      border-radius: 30px;
+      margin-top: 30px;
+      backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+    button:hover {
+      background: rgba(255,255,255,0.4);
+    }
+  </style>
+</head>
+<body>
+  <div class="sun"></div>
+  <h1>Doğum Günün Kutlu Olsun Mustafa 💙</h1>
+  <div id="mesaj">Nice mutlu yıllara sevgili Mustafa! 🌅</div>
+  <button id="sesBtn">🔊 Deniz Sesini Aç</button>
+  <div class="wave"></div>
+  <script>
+    const denizSesi = new Audio('deniz.mp3');
+    denizSesi.loop = true;
+    function baslatSes() {
+      denizSesi.play().then(() => {
+        document.getElementById('sesBtn').textContent = '🔇 Sesi Durdur';
+      }).catch(err => console.log('Ses başlatılamadı:', err));
+      document.removeEventListener('touchstart', baslatSes);
+      document.removeEventListener('click', baslatSes);
+    }
+    document.addEventListener('touchstart', baslatSes, { once: true });
+    document.addEventListener('click', baslatSes, { once: true });
+    document.getElementById('sesBtn').addEventListener('click', () => {
+      if (denizSesi.paused) {
+        denizSesi.play();
+        document.getElementById('sesBtn').textContent = '🔇 Sesi Durdur';
+      } else {
+        denizSesi.pause();
+        document.getElementById('sesBtn').textContent = '🔊 Deniz Sesini Aç';
+      }
+    });
+  </script>
+</body>
+</html>
